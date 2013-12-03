@@ -35,15 +35,15 @@ public final class Experiment<T> {
 
 	}
 
-	public Result runBenchmarkClass(int runs, int warmUpRuns, int measureRuns, int initRuns) {
+	public Result runBenchmarkClass(int benchmarkRuns, int warmUpIterations, int measureIterartions, int initRuns) {
 		instantiateClass();
-		Result result = new Result(runs);
+		Result result = new Result(getName(), benchmarkRuns);
 
 		System.out.println("starting initial warm-up phase");
 
 		for (Method m : benchmarks) {
 			System.out.println("starting warm-up phase for benchmark " + m.getName());
-			doWarmUp(warmUpRuns, m);
+			doWarmUp(warmUpIterations, m);
 		}
 
 		System.out.println("--- warm up is over " + initRuns + " test runs are started now...");
@@ -51,20 +51,20 @@ public final class Experiment<T> {
 		for (int i = 0; i < initRuns; i++) {
 			System.out.println("Starting test run " + i);
 			for (Method m : benchmarks) {
-				measure(measureRuns, m, true);
+				measure(measureIterartions, m, true);
 			}
 		}
 
-		System.out.println("--- test runs over " + runs + " measurement runs are started now...");
+		System.out.println("--- test runs over " + benchmarkRuns + " measurement runs are started now...");
 
-		for (int i = 0; i < runs; i++) {
+		for (int i = 0; i < benchmarkRuns; i++) {
 			System.out.println("Starting run " + i);
 
 			for (Method m : benchmarks) {
 
 				System.out.println("starting measurement of " + m.getName());
 
-				double[] results = measure(measureRuns, m);
+				double[] results = measure(measureIterartions, m);
 
 				result.set(i, m.getName(), results);
 
@@ -73,6 +73,13 @@ public final class Experiment<T> {
 		}
 
 		return result;
+	}
+
+	private String getName() {
+		boolean hasNoName = true;
+		if (hasNoName) {
+			return benchmarkClass.getSimpleName();
+		} else return "hallo";
 	}
 
 	private double[] measure(int measureRuns, Method m) {

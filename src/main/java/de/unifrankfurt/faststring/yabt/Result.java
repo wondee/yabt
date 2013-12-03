@@ -9,10 +9,12 @@ public class Result {
 
 	private Map<String, double[][]> resultMap;
 	private int runs;
+	private String name;
 
-	Result(int runs) {
+	Result(String name, int runs) {
 		resultMap = Maps.newHashMap();
 		this.runs = runs;
+		this.name = name;
 	}
 
 	private void initializeMap(String name) {
@@ -46,6 +48,10 @@ public class Result {
 
 	public double[] results(String name, int run) {
 		return resultMap.get(name)[run];
+	}
+
+	public String getName() {
+		return name;
 	}
 
 

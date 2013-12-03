@@ -12,11 +12,6 @@ import de.unifrankfurt.faststring.yabt.export.PrintStreamExporter;
 
 public class BenchmarkRunner {
 
-	public static final int DEFAULT_RUNS = 5;
-	public static final int DEFAULT_INIT_RUNS = 5;
-	public static final int DEFAULT_WARM_UP_RUNS = 500000;
-	public static final int DEFAULT_MEASURE_RUNS = 20000;
-
 	public static final List<String> NEEDED_JVM_ARGS;
 
 	public static final String JVM_ARG_COMPILATION_OUTPUT = "-XX:+PrintCompilation";
@@ -25,24 +20,25 @@ public class BenchmarkRunner {
 		NEEDED_JVM_ARGS = Arrays.asList(JVM_ARG_COMPILATION_OUTPUT);
 	}
 
-	public static void main(String[] args) {
-
+	public static void start() {
+		start(new RunnerConfig());
 	}
 
-	public static void start(Class<?> benchmarkClass) {
-		start(benchmarkClass, DEFAULT_RUNS, DEFAULT_WARM_UP_RUNS, DEFAULT_INIT_RUNS, DEFAULT_MEASURE_RUNS);
-	}
-
-	public static void start(Class<?> benchmarkClass, int runs, int warmUps, int init, int measure) {
+	public static void start(RunnerConfig config) {
 		checkJVMSettings();
-		createBenchmark(benchmarkClass, runs, warmUps, init, measure, Arrays.asList(new PrintStreamExporter(), new FileExporter("out", benchmarkClass.getSimpleName())));
+		createBenchmark(config.benchmarkClass(),
+				config.benchmarkRuns(),
+				config.warmUpIterations(),
+				config.initRuns(),
+				config.measureIterations(),
+				config.exporter());
 	}
 
-	private static <T> void createBenchmark(Class<T> benchmarkClass, int runs, int warmUps, int init, int measure, Collection<? extends ExportStrategy> exporters) {
+	private static <T> void createBenchmark(Class<T> benchmarkClass, int benchmarkRuns, int warmUpsIterations, int initRuns, int measureIterations, Collection<? extends ExportStrategy> exporters) {
 
 		Experiment<T> benchmark = new Experiment<>(benchmarkClass);
 
-		Result result = benchmark.runBenchmarkClass(runs, warmUps, measure, init);
+		Result result = benchmark.runBenchmarkClass(benchmarkRuns, warmUpsIterations, measureIterations, initRuns);
 
 
 		for (ExportStrategy exporter : exporters) {

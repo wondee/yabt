@@ -13,13 +13,11 @@ import de.unifrankfurt.faststring.yabt.Result;
 public class FileExporter implements ExportStrategy {
 
 	private String path;
-	private String prefix;
 
 	private DecimalFormat df = new DecimalFormat("#");
 
-	public FileExporter(String path, String prefix) {
+	public FileExporter(String path) {
 		this.path = path;
-		this.prefix = prefix;
 	}
 
 	@Override
@@ -29,7 +27,7 @@ public class FileExporter implements ExportStrategy {
 
 			for (String name : result.names()) {
 				BufferedWriter writer = Files.newBufferedWriter(
-						createFileName(name), Charset.defaultCharset());
+						createFileName(result.getName(), name), Charset.defaultCharset());
 				for (int run = 0; run < result.runs(); run++) {
 					for (int m = 0; m < result.measurments(name, run); m++) {
 						writer.write(df.format(result.get(name, run, m)));
@@ -48,7 +46,7 @@ public class FileExporter implements ExportStrategy {
 
 	}
 
-	private Path createFileName(String name) {
+	private Path createFileName(String prefix, String name) {
 		try {
 
 			Path dir = Paths.get(path);
