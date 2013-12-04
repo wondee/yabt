@@ -25,6 +25,10 @@ public class RunnerConfig {
 	private int initRuns = DEFAULT_INIT_RUNS;
 	private Collection<? extends ExportStrategy> exporter = DEFAULT_EXPORTER;
 
+	RunnerConfig(Class<?> clazz) {
+		benchmarkClass = clazz;
+	}
+
 	Class<?> benchmarkClass() {
 		checkNotNull(benchmarkClass, "benchmarkClass must not be null");
 		return this.benchmarkClass;

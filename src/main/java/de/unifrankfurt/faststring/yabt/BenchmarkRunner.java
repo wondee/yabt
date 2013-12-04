@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import de.unifrankfurt.faststring.yabt.export.ExportStrategy;
-import de.unifrankfurt.faststring.yabt.export.FileExporter;
-import de.unifrankfurt.faststring.yabt.export.PrintStreamExporter;
 
 
 public class BenchmarkRunner {
@@ -20,8 +18,12 @@ public class BenchmarkRunner {
 		NEEDED_JVM_ARGS = Arrays.asList(JVM_ARG_COMPILATION_OUTPUT);
 	}
 
-	public static void start() {
-		start(new RunnerConfig());
+	/**
+	 * Starts the benchmark on this class with the default params
+	 * @param clazz the benchmark class
+	 */
+	public static void start(Class<?> clazz) {
+		start(new RunnerConfig(clazz));
 	}
 
 	public static void start(RunnerConfig config) {
