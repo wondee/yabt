@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Stopwatch;
 
+import de.unifrankfurt.faststring.yabt.annotation.Benchmark;
+import de.unifrankfurt.faststring.yabt.annotation.Init;
+
 public final class Experiment<T> {
 
 	private T benchmarkInstance;
@@ -89,7 +92,7 @@ public final class Experiment<T> {
 	private double[] measure(int measureRuns, Method m, boolean soft) {
 		double[] results = new double[measureRuns];
 
-		GcWatcher watcher = new GcWatcher();
+		DisturbanceWatcher watcher = new DisturbanceWatcher();
 
 		do {
 			watcher.reset();
@@ -97,11 +100,16 @@ public final class Experiment<T> {
 				invokeBeforeCalls();
 				results[i] = invokeBenchmark(m);
 			}
-			if (!soft && watcher.wasGcActive()) {
-				System.err.println("GC run while runnig the benchmark, measurement will be repeated");
+			if (!soft && watcher.wasDisturbing()) {
+				if (watcher.wasGcActive()) {
+					System.err.println("GC run while runnig the benchmark, measurement will be repeated");
+				}
+				if (watcher.wasCompilation()) {
+					System.err.println("Compilation took place while runnig the benchmark, measurement will be repeated");
+				}
 			}
 
-		} while(!soft && watcher.wasGcActive());
+		} while(!soft && watcher.wasDisturbing());
 
 		return results;
 
@@ -138,9 +146,7 @@ public final class Experiment<T> {
 	}
 
 	private long invokeBenchmark(Method m) {
-		try {
-//			long before = System.nanoTime();
-
+		try {			
 			Stopwatch sw = Stopwatch.createStarted();
 
 			Object o = m.invoke(benchmarkInstance);
@@ -149,9 +155,9 @@ public final class Experiment<T> {
 				System.err.println("o is null...");
 			}
 
-//			long measurement = System.nanoTime() - before;
-			return sw.elapsed(TimeUnit.NANOSECONDS);
-//			return measurement;
+			long time = sw.elapsed(TimeUnit.NANOSECONDS);
+			
+			return time;
 		} catch (IllegalAccessException
 				| IllegalArgumentException
 				| InvocationTargetException e) {
