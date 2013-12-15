@@ -12,10 +12,16 @@ import de.unifrankfurt.faststring.yabt.Result;
 
 public class FileExporter implements ExportStrategy {
 
+	public static final String DEFAULT_OUTPUT_PATH = "out";
+	
 	private String path;
 
 	private DecimalFormat df = new DecimalFormat("#");
 
+	public FileExporter() {
+		this(DEFAULT_OUTPUT_PATH);
+	}
+	
 	public FileExporter(String path) {
 		this.path = path;
 	}
@@ -38,10 +44,8 @@ public class FileExporter implements ExportStrategy {
 				}
 
 			}
-
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("could not write to file", e);
 		}
 
 	}
@@ -54,7 +58,7 @@ public class FileExporter implements ExportStrategy {
 				Files.createDirectory(dir);
 			}
 
-			Path file = Paths.get(path, prefix + name + ".csv");
+			Path file = Paths.get(path, prefix + "_" + name + ".csv");
 			if (!Files.exists(file)) {
 				Files.createFile(file);
 			}

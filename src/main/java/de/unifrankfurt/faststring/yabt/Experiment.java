@@ -38,9 +38,9 @@ public final class Experiment<T> {
 
 	}
 
-	public Result runBenchmarkClass(int benchmarkRuns, int warmUpIterations, int measureIterartions, int initRuns) {
+	public Result runBenchmarkClass(String name, int benchmarkRuns, int warmUpIterations, int measureIterartions, int initRuns) {
 		instantiateClass();
-		Result result = new Result(getName(), benchmarkRuns);
+		Result result = new Result(name, benchmarkRuns);
 
 		System.out.println("starting initial warm-up phase");
 
@@ -76,13 +76,6 @@ public final class Experiment<T> {
 		}
 
 		return result;
-	}
-
-	private String getName() {
-		boolean hasNoName = true;
-		if (hasNoName) {
-			return benchmarkClass.getSimpleName();
-		} else return "hallo";
 	}
 
 	private double[] measure(int measureRuns, Method m) {

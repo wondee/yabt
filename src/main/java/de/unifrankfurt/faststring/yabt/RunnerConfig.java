@@ -1,23 +1,14 @@
 package de.unifrankfurt.faststring.yabt;
 
-import static com.google.common.base.Preconditions.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
+import static com.google.common.base.Preconditions.checkNotNull;
 import de.unifrankfurt.faststring.yabt.annotation.BenchmarkConfig;
-import de.unifrankfurt.faststring.yabt.export.ExportStrategy;
-import de.unifrankfurt.faststring.yabt.export.PrintStreamExporter;
 
 public class RunnerConfig {
 
 	public static final int DEFAULT_BENCHMARK_RUNS = 5;
 	public static final int DEFAULT_INIT_RUNS = 5;
 	public static final int DEFAULT_WARM_UP_ITERATIONS = 500000;
-	public static final int DEFAULT_MEASURE_ITERATIONS = 200000;
-	public static final String DEFAULT_OUTPUT_PATH = "out";
-	public static final List<? extends ExportStrategy> DEFAULT_EXPORTER = Arrays.asList(new PrintStreamExporter());
+	public static final int DEFAULT_MEASURE_ITERATIONS = 20000;
 
 	private Class<?> benchmarkClass;
 	
@@ -27,8 +18,6 @@ public class RunnerConfig {
 	private int warmUpIterations = DEFAULT_WARM_UP_ITERATIONS;
 	private int measureIterations = DEFAULT_MEASURE_ITERATIONS;
 	private int initRuns = DEFAULT_INIT_RUNS;
-	private Collection<? extends ExportStrategy> exporter = DEFAULT_EXPORTER;
-
 	
 	
 	RunnerConfig(Class<?> clazz) {
@@ -38,6 +27,9 @@ public class RunnerConfig {
 		
 		if (config != null) {
 			copyConfig(config);
+		} else {
+			
+			throw new IllegalArgumentException("given class " + clazz.getName() + " is not annotated with BenchmarkConfig");
 		}
 	}
 
@@ -68,10 +60,6 @@ public class RunnerConfig {
 
 	int initRuns() {
 		return initRuns;
-	}
-
-	Collection<? extends ExportStrategy> exporter() {
-		return exporter;
 	}
 	
 	String name() {
