@@ -1,11 +1,11 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import de.unifrankfurt.faststring.yabt.export.ExportStrategy;
+import de.unifrankfurt.yabt.export.ExportStrategy;
 
 
 public class BenchmarkRunner {

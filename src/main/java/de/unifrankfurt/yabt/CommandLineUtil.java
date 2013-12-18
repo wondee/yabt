@@ -1,7 +1,7 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
-import de.unifrankfurt.faststring.yabt.export.FileExporter;
-import de.unifrankfurt.faststring.yabt.export.PrintStreamExporter;
+import de.unifrankfurt.yabt.export.FileExporter;
+import de.unifrankfurt.yabt.export.PrintStreamExporter;
 
 
 public class CommandLineUtil {

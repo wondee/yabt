@@ -1,4 +1,4 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
 import java.lang.management.CompilationMXBean;
 import java.lang.management.ManagementFactory;

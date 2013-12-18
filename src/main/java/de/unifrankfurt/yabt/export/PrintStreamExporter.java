@@ -1,10 +1,10 @@
-package de.unifrankfurt.faststring.yabt.export;
+package de.unifrankfurt.yabt.export;
 
 import java.io.PrintStream;
 
 import org.apache.commons.math.stat.StatUtils;
 
-import de.unifrankfurt.faststring.yabt.Result;
+import de.unifrankfurt.yabt.Result;
 
 public class PrintStreamExporter implements ExportStrategy {
 

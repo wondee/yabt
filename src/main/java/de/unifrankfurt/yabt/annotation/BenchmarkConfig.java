@@ -1,9 +1,9 @@
-package de.unifrankfurt.faststring.yabt.annotation;
+package de.unifrankfurt.yabt.annotation;
 
-import static de.unifrankfurt.faststring.yabt.RunnerConfig.DEFAULT_BENCHMARK_RUNS;
-import static de.unifrankfurt.faststring.yabt.RunnerConfig.DEFAULT_INIT_RUNS;
-import static de.unifrankfurt.faststring.yabt.RunnerConfig.DEFAULT_MEASURE_ITERATIONS;
-import static de.unifrankfurt.faststring.yabt.RunnerConfig.DEFAULT_WARM_UP_ITERATIONS;
+import static de.unifrankfurt.yabt.RunnerConfig.DEFAULT_BENCHMARK_RUNS;
+import static de.unifrankfurt.yabt.RunnerConfig.DEFAULT_INIT_RUNS;
+import static de.unifrankfurt.yabt.RunnerConfig.DEFAULT_MEASURE_ITERATIONS;
+import static de.unifrankfurt.yabt.RunnerConfig.DEFAULT_WARM_UP_ITERATIONS;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

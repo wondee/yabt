@@ -1,4 +1,4 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
 import static org.reflections.ReflectionUtils.getAllMethods;
 import static org.reflections.ReflectionUtils.withAnnotation;
@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Stopwatch;
 
-import de.unifrankfurt.faststring.yabt.annotation.Benchmark;
-import de.unifrankfurt.faststring.yabt.annotation.Init;
+import de.unifrankfurt.yabt.annotation.Benchmark;
+import de.unifrankfurt.yabt.annotation.Init;
 
 public final class Experiment<T> {
 

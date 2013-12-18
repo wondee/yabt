@@ -1,4 +1,4 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -10,8 +10,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.ImmutableMap.Builder;
 
-import de.unifrankfurt.faststring.yabt.export.ExportStrategy;
-import de.unifrankfurt.faststring.yabt.export.PrintStreamExporter;
+import de.unifrankfurt.yabt.export.ExportStrategy;
+import de.unifrankfurt.yabt.export.PrintStreamExporter;
 
 public class BenchmarkSuite {
 	

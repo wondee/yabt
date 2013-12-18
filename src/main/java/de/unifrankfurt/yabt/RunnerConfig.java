@@ -1,7 +1,7 @@
-package de.unifrankfurt.faststring.yabt;
+package de.unifrankfurt.yabt;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import de.unifrankfurt.faststring.yabt.annotation.BenchmarkConfig;
+import de.unifrankfurt.yabt.annotation.BenchmarkConfig;
 
 public class RunnerConfig {
 

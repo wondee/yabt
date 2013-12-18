@@ -1,4 +1,4 @@
-package de.unifrankfurt.faststring.yabt.export;
+package de.unifrankfurt.yabt.export;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
-import de.unifrankfurt.faststring.yabt.Result;
+import de.unifrankfurt.yabt.Result;
 
 public class FileExporter implements ExportStrategy {
 
