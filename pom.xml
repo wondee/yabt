@@ -10,7 +10,6 @@
     <modules>
         <module>core</module>
         <module>examples</module>
-        <module>yabt-examples</module>
     </modules>
 
 	<properties>
